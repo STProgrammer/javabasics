@@ -11,45 +11,28 @@ public class TestGeometricObject {
 		Circle cr2 = new Circle(8, "white", false);
 		Circle cr3;
 		System.out.println("The biggest circle: ");
-		if (cr1.compareTo(cr2) == -1) {
-			System.out.println(cr2);
-			cr3 = cr2;
-		} else {
-			System.out.println(cr1);
-			cr3 = cr1;
-		}
+		cr3 = (Circle)GeometricObject.max(cr1, cr2);
+		System.out.println(cr3);
 		
 		System.out.println("\nThe biggest rectangle: ");
-		if (rec1.compareTo(rec2) == -1) {
-			System.out.println(rec2);
-			rec3 = rec2;
-		} else { 
-			System.out.println(rec1);
-			rec3 = rec1;
-		}
+		rec3 = (Rectangle)GeometricObject.max(rec1, rec2);
+		System.out.println(rec3);
 		
 		System.out.println("\nThe biggest triangle: ");
-		if (tr1.compareTo(tr2) == -1) {
-			System.out.println(tr2);
-			tr3 = tr2;
-		} else {
-			System.out.println(tr1);
-			tr3 = tr1;
-		}
+		tr3 = (Triangle)GeometricObject.max(tr1, tr2);
+		System.out.println(tr3);
 		
+		GeometricObject obj;
+		obj = GeometricObject.max(GeometricObject.max(cr3, rec3), tr3);
 		System.out.print("\nThe biggest geometric object is: ");
-		if (tr3.compareTo(cr3) == 1) {
-			if (tr3.compareTo(rec3) == 1) {
-				System.out.println(tr3);
-			} else {
-				System.out.println(rec3);
-			}
-		}
-		else if (cr3.compareTo(rec3) == 1) {
-			System.out.println(cr3);
-		} else {
+		
+		if (obj instanceof Circle)
+				System.out.println(cr3);
+		if (obj instanceof Rectangle)
 			System.out.println(rec3);
-		}
+		if (obj instanceof Triangle)
+			System.out.println(tr3);
+		
 	}
 }
 
