@@ -1,4 +1,3 @@
-
 public class TilnaermetPhi {
 
 	public static void main(String[] args) {
