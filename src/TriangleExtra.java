@@ -93,9 +93,9 @@ public class TriangleExtra extends SimpleGeometricObject {
 	} // end get Perimeter
 	
 	public boolean equals(Object other) {
-		return (this.getSide1() == ((Triangle)other).getSide1() &
-				this.getSide2() == ((Triangle)other).getSide2() &
-				this.getSide3() == ((Triangle)other).getSide3());
+		return (this.getSide1() == ((TriangleExtra)other).getSide1() &
+				this.getSide2() == ((TriangleExtra)other).getSide2() &
+				this.getSide3() == ((TriangleExtra)other).getSide3());
 	} // end equal()
 	
 	//get nr of objects (eve if invalid)

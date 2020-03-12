@@ -1,21 +1,21 @@
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.GregorianCalendar;
 
-public class Account  {
+public class Account implements Comparable<Account> {
 	// legg inn en referanse til en ArrayList av Transaction objekter
 	private static double annualInterestRate;
 	private double balance;
-	private Date dateBuilt;
+	private GregorianCalendar dateBuilt;
 	private int id;
 	private String name;
 	ArrayList<Transaction> transactions;
 	
-	public Account(Date dateCreated) {
-		this.dateBuilt = dateCreated;
+	public Account(GregorianCalendar dateEstablished) {
+		this.dateBuilt = dateEstablished;
 		this.transactions = new ArrayList<>();
 	}
 	
-	public Account(String name, int id, double balance, Date dateBuilt) {
+	public Account(String name, int id, double balance, GregorianCalendar dateBuilt) {
 		this.name = name;
 		this.id = id;
 		this.balance = balance;
@@ -24,10 +24,11 @@ public class Account  {
 		// opprett arraylist av Transaction objekter
 	}
 	
+	/** get and set methods */
 	public ArrayList<Transaction> getTransactions() {
 		return transactions;}
 	
-	public Date getDateBuilt() {return dateBuilt;}
+	public GregorianCalendar getDateBuilt() {return dateBuilt;}
 	
 	public double getBalance() {return balance;}
 	
@@ -61,20 +62,20 @@ public class Account  {
 				this.balance));
 	}
 	
-	/*public String getTransactions() {
-		int size = transactions.size();
-		String summary = String.format("Name: %s %nAnnual Interest Rate: %.2f Balance: %.2f, %n%s %2s %10s %10s %10s", name, 
-				annualInterestRate, balance, "Date", "Type", "Amount", 
-				"Balance", "Description");
-		System.out.println(summary);
-		String transact = "";
-		for(int i = 0; i < size; i++) {
-			transact += transactions.get(i).toString();
+	/** Compare two accounts */
+	@Override
+	public int compareTo(Account otherAccount) {
+		if (getBalance() > otherAccount.getBalance()) {
+			return 1;
 		}
-		summary = summary + transact;
-		return summary;
-	}*/
-		
+		else if (getBalance() < otherAccount.getBalance()) {
+			return -1;
+		} else {
+			return getDateBuilt().compareTo(otherAccount.getDateBuilt());
+		}
+			
+	}
+	
 	@Override
 	public String toString() {
 		return String.format("Name: %s, %nID: %d %nAnnual Interest Rate: %.1f"

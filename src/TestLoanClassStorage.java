@@ -19,6 +19,7 @@ public class TestLoanClassStorage {
 	  	int answer = input.nextInt();
 	    
 	  	if (answer == 1) {
+	  		Loan l;
 	  		System.out.println("Type in name of the file");
 	  		fileName = input.next();
 		    /** Check if file exists and read from file 
@@ -26,16 +27,20 @@ public class TestLoanClassStorage {
 		    
 		    File file = new File(fileName);
 		    if (file.exists()) {
-			    try (	ObjectInputStream oin =
-			    	        new ObjectInputStream(new 
-			    	        		FileInputStream(fileName));
+			    try (FileInputStream fis = 
+			    		new FileInputStream(fileName);
+			    	ObjectInputStream oin =
+			    	      new ObjectInputStream(fis);
 			    	    ) {
-			    	      loans = (ArrayList<Loan>)(oin.readObject());
-			    	      for (Loan l: loans) {
-			    	    	  System.out.println(l);
-			    	      }
-			    	    }
+//		    	boolean cont = true;
+			    while(fis.available() != 0) {
+		    		loans.add((Loan)oin.readObject());
+		    	 	}  // end while loop 
+			     } // end try
 			    
+	    	    for (Loan d: loans) {
+	    	    	System.out.println(d);
+	    	     }
 		    }
 	  	}
 
@@ -95,7 +100,9 @@ public class TestLoanClassStorage {
 			    				FileOutputStream(fileName));
 		    	    ) {
 		    	      // Write arrays to the object output stream
-		    	      output.writeObject(loans);
+			      	for(Loan l : loans) {
+			      		output.writeObject(l);
+				    }	
 		    	      System.out.println("Loans saved on " + fileName);
 		    	    } 
 		  	} // end if you want to save all on file
@@ -139,7 +146,9 @@ public class TestLoanClassStorage {
 			    				FileOutputStream(fileName));
 		    	    ) {
 		    	      // Write arrays to the object output stream
-		    	      output.writeObject(loans2);
+			      	for(Loan l : loans2) {
+			      		output.writeObject(l);
+				    }
 		    	      System.out.println("Loans saved on " + fileName);
 		    	      for (Loan l: loans2) {
 		    	    	  System.out.println(l);
@@ -154,3 +163,4 @@ public class TestLoanClassStorage {
 	}
 
 }
+
